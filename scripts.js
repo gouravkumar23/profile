@@ -1,20 +1,32 @@
+let lastSparkleTime = 0;
+
 function createSparkles(event) {
-    const sparkle = document.createElement('div');
-    sparkle.classList.add('sparkle');
-    
-    // Set sparkle position based on mouse coordinates
-    sparkle.style.top = `${event.clientY - 10}px`;
-    sparkle.style.left = `${event.clientX - 10}px`;
-    
-    document.getElementById('sparkle-container').appendChild(sparkle);
-  
-    // Remove sparkle after animation ends
-    setTimeout(() => {
-      sparkle.remove();
-    }, 600);
-  }
-  
-  document.addEventListener('mousemove', createSparkles);
+  const now = Date.now();
+
+  // Limit sparkle creation rate (once every 50ms)
+  if (now - lastSparkleTime < 60) return;
+  lastSparkleTime = now;
+
+  const sparkle = document.createElement('div');
+  sparkle.classList.add('sparkle');
+
+  // Use pageX and pageY to keep sparkles in sync with cursor
+  sparkle.style.top = `${event.pageY - 15}px`;
+  sparkle.style.left = `${event.pageX - 5}px`;
+
+  document.getElementById('sparkle-container').appendChild(sparkle);
+
+  // Remove sparkle after animation ends
+  setTimeout(() => {
+    sparkle.remove();
+  }, 800);
+}
+
+// Apply effect when mouse moves
+document.addEventListener('mousemove', createSparkles);
+
+
+
 
 document.addEventListener('click', enableVideoPlayback);
 document.addEventListener('touchstart', enableVideoPlayback);
@@ -45,3 +57,6 @@ function enableVideoPlayback() {
       document.removeEventListener('touchstart', enableVideoPlayback);
     }
 }
+
+
+
