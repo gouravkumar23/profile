@@ -36,6 +36,7 @@ function enableVideoPlayback() {
 
     if (video) { // Only play if the video is paused
         video.muted = false;
+        video.play()=true;
         video.play().catch(error => {
             console.log('Autoplay with sound is blocked, user interaction needed.');
         });
@@ -45,17 +46,19 @@ function enableVideoPlayback() {
         document.removeEventListener('touchstart', enableVideoPlayback);
     }
 
-    if(video.paused){
+    /* if(video.paused){
       
+document.addEventListener('click', enableVideoPlayback);
+document.addEventListener('touchstart', enableVideoPlayback);
       video.muted = false;
       video.play().catch(error => {
           console.log('Autoplay with sound is blocked, user interaction needed.');
       });
-
+      video.play()=true;
       // Remove event listeners to prevent multiple triggers
       document.removeEventListener('click', enableVideoPlayback);
       document.removeEventListener('touchstart', enableVideoPlayback);
-    }
+    } */
 }
 
 
