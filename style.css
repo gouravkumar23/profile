@@ -1,13 +1,12 @@
-/* General Body Styling */
+
 body {
-    font-family: 'Uncial Antiqua', sans-serif;
+    font-family:  sans-serif;
     color: #fff;
     margin: 0;
     padding: 0;
     height: 100vh;
     text-align: center;
     scroll-behavior: smooth; /* Smooth scrolling between sections */
-    /* cursor: url('assets/images/wand.png'), auto; */
 }
 
 /* Header Section */
@@ -24,16 +23,21 @@ header {
 
 
 /* Background Video */
-.background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensures the video covers the entire header */
-    z-index: -1; /* Places the video behind the content */
-    pointer-events: none;
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Keeps video behind content */
 }
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures video covers full screen */
+}
+
 
 /* Header Content */
 .header-content {
@@ -478,29 +482,51 @@ header {
 #achievement .btn{
     margin-top: 100px;
 }
-#sparkle-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 9999;
-    overflow: hidden;
-  }
-  
-  .sparkle {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: white;
-    opacity: 1;
-    transition: all 0.6s ease-out;
-  }
-   
 
 
    footer{
     background-color: black;
    }
+   
+   
+   
+   
+   
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: gold;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 
+                     50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 5px gold) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+  animation: sparkle-animation 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes sparkle-animation {
+  0% {
+    opacity: 1;
+    transform: scale(0.01) translateY(5);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(0.04) translateY(-25);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(2.5) translateY(-50px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) translateY(-100px);
+  }
+}
+
+/* Magic Wand Cursor */
+
+body {
+  cursor: url('cursor.cur'), auto ;
+}
