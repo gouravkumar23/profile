@@ -16,28 +16,32 @@ function createSparkles(event) {
   
   document.addEventListener('mousemove', createSparkles);
 
+document.addEventListener('click', enableVideoPlayback);
+document.addEventListener('touchstart', enableVideoPlayback);
 
-  function unmuteVideo() {
+function enableVideoPlayback() {
     let video = document.getElementById('bgVideo');
 
-    if (video) {
+    if (video) { // Only play if the video is paused
         video.muted = false;
         video.play().catch(error => {
             console.log('Autoplay with sound is blocked, user interaction needed.');
         });
 
-        // Remove event listeners after the first interaction
-        document.removeEventListener('click', unmuteVideo);
-        document.removeEventListener('touchstart', unmuteVideo);
+        // Remove event listeners to prevent multiple triggers
+        document.removeEventListener('click', enableVideoPlayback);
+        document.removeEventListener('touchstart', enableVideoPlayback);
+    }
+
+    if(video.paused){
+      
+      video.muted = false;
+      video.play().catch(error => {
+          console.log('Autoplay with sound is blocked, user interaction needed.');
+      });
+
+      // Remove event listeners to prevent multiple triggers
+      document.removeEventListener('click', enableVideoPlayback);
+      document.removeEventListener('touchstart', enableVideoPlayback);
     }
 }
-
-// Listen for both click and touchstart for better mobile compatibility
-document.addEventListener('click', unmuteVideo);
-document.addEventListener('touchstart', unmuteVideo);
-
-
-    // Listen for either a click or scroll event
-    document.addEventListener('click', enableVideoPlayback, { once: true });
-    window.addEventListener('scroll', enableVideoPlayback, { passive: true, once: true });
-});
